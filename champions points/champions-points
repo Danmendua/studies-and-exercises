@@ -1,0 +1,12 @@
+const resultados = ["V", "E", "V", "V", "V", "D", "D"];
+let placar = 0
+
+for (pontos of resultados) {
+    if (pontos == "V") {
+        placar += 3
+    } else if (pontos == "E") {
+        placar += 1
+    } else {
+        placar += 0
+    }
+} console.log(placar)
