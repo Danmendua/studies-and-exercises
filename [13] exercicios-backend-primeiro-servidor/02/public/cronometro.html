@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cronômetro</title>
+</head>
+
+<body>
+    <h1>Cronômetro</h1>
+    <p id="tempo">Tempo atual do cronômetro: <span id="tempo-atual">00 minutos e 00 segundos</span></p>
+    <button id="iniciar">Iniciar</button>
+    <button id="pausar">Pausar</button>
+    <button id="continuar">Continuar</button>
+    <button id="zerar">Zerar</button>
+
+    <script>
+        const tempo = document.getElementById('tempo-atual');
+        let min = 0;
+        let seg = 0;
+        let checar = false;
+
+        function formatarTempo(minutos, segundos) {
+            const minFormatado = minutos < 10 ? `0${minutos}` : minutos;
+            const segFormatado = segundos < 10 ? `0${segundos}` : segundos;
+            return `${minFormatado} minutos e ${segFormatado} segundos`;
+        }
+
+        function iniciador() {
+            checar = true;
+            setInterval(() => {
+                if (checar) {
+                    if (seg < 59) {
+                        seg++;
+                    } else {
+                        seg = 0;
+                        min++;
+                    }
+                    tempo.textContent = formatarTempo(min, seg);
+                }
+            }, 1000);
+        }
+        //
+        document.getElementById('iniciar').addEventListener('click', () => {
+            iniciador();
+        });
+        // pausar
+        document.getElementById('pausar').addEventListener('click', () => {
+            checar = false;
+        });
+        // continuar
+        document.getElementById('continuar').addEventListener('click', () => {
+            checar = true;
+        });
+        // zerar
+        document.getElementById('zerar').addEventListener('click', () => {
+            min = 0;
+            seg = 0;
+            tempo.textContent = formatarTempo(min, seg);
+        });
+    </script>
+</body>
+
+</html>
+
+<!-- https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/meta
+    https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element/button
+    https://developer.mozilla.org/pt-BR/docs/Web/API/Node/textContent
+    https://developer.mozilla.org/pt-BR/docs/Web/API/Document/getElementById
+    https://developer.mozilla.org/pt-BR/docs/Web/API/EventTarget/addEventListener
+ -->
